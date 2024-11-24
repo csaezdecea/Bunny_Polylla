@@ -124,7 +124,7 @@ segments_3 = load_segments(segments_3_path)
 triangulation = pv.PolyData(triangulation_mesh.vertices, faces)
 
 # Initialize a PyVista plotter
-plotter = pv.Plotter()
+plotter = pv.Plotter(off_screen=True)
 
 # Add the triangulation mesh
 plotter.add_mesh(triangulation, color="lightblue", opacity=1, show_edges=True, edge_color="black", line_width=4)
@@ -159,7 +159,8 @@ plotter.view_isometric()  # Set initial view
 
 # Set the camera position with the y-axis up
 plotter.camera_position = [(0, -1, 0), (0, 0, 0), (0, 0, 1)]  # Adjust view
-plotter.view_vector([0, 0, 1], [0, 1, 0])  # Set y-axis as up
+plotter.view_vector([-.5, 0, .5], [0, 1, 0])  # Set y-axis as up
 
 # Render the plot
-plotter.show()
+plotter.show(screenshot=("data/bunny.png"))
+

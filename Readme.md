@@ -147,6 +147,10 @@ python3 plot.py
 Ensure the output files (.obj, .off) are in the correct paths for the script to load them.
 Comments in the Code
 
+The following figure shows an example visualization (with ``plot.py``) of the "bunny" mesh. The original triangulation is displayed in black, with the frontier edges marked in red to indicate the boundaries of the Polylla regions. Non-regular polygonal regions are highlighted in yellow, while green dots represent the barrier points. Dotted white lines indicate the seed edges.
+
+![A beautiful bunny](data/bunny.png "Rendered Bunny")
+
 ## bunny.cpp 
 
 Contains comments explaining each step of the program. Here are key highlights:
