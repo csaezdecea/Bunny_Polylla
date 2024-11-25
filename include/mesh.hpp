@@ -23,18 +23,29 @@ typedef Surface_mesh::Edge_index Edge_index;
 std::unordered_map<Halfedge_index, bool> is_NRP_seed_edge;
 std::vector<std::vector<Point_3>> NRP_Polygons;
 
-// Function to compute the normal of a triangle
-Vector_3 compute_triangle_normal(const Point_3& p0, const Point_3& p1, const Point_3& p2) {
-    Vector_3 u = p1 - p0;
-    Vector_3 v = p2 - p0;
-    return CGAL::cross_product(u, v);
-}
 
 // Function to normalize a vector
 Vector_3 normalize_vector(const Vector_3& vec) {
     double norm = std::sqrt(CGAL::to_double(vec.squared_length()));
     return vec / norm;
 }
+
+
+// Function to compute the normal of a triangle
+Vector_3 triangle_normal(const Halfedge_index he, const Surface_mesh& mesh) {
+    auto he1 = he;
+    auto he2 = mesh.next(he1);
+    // Get the points at each vertex of the triangle
+    Point_3 p0 = mesh.point(source(he1, mesh));
+    Point_3 p1 = mesh.point(target(he1, mesh));
+    Point_3 p2 = mesh.point(target(he2, mesh));
+    Vector_3 u = p1 - p0;
+    Vector_3 v = p2 - p0;
+    Vector_3 normal = CGAL::cross_product(u, v);
+    return normalize_vector(normal);
+}
+
+
 
 // Function to remove degenerate faces
 void remove_degenerate_faces(Surface_mesh& sm) {
@@ -328,6 +339,31 @@ const std::unordered_map<Halfedge_index, bool>& is_longest_edge) {
     }
     return is_seed_edge;
 }
+
+
+// Method to find the Delta Normal edges and store in the mapping
+std::unordered_map<Halfedge_index, bool> find_Delta_Normal_edges_mapping(const Surface_mesh& mesh, 
+std::unordered_map<Halfedge_index, bool>& is_frontier_edge, std::unordered_map<Halfedge_index, bool>& is_seed_edge, double critical_angle) {
+    std::unordered_map<Halfedge_index, bool> is_Delta_Normal_edge;
+    double pi = atan(1)*4;
+    std::cout << pi << std::endl;
+    for (auto he : halfedges(mesh)) is_Delta_Normal_edge[he] = false;
+    for (auto he : halfedges(mesh)) {
+        auto twinhe = mesh.opposite(he);
+        auto triangle_1 = mesh.face(he);
+        auto triangle_2 = mesh.face (twinhe);
+        Vector_3 normal1 = triangle_normal(he, mesh);
+        Vector_3 normal2 = triangle_normal(twinhe, mesh);
+        double cosAng = normal1 * normal2;
+        double cosCrit = cos(critical_angle*pi/180);
+        if (cosAng < cosCrit) {
+            is_Delta_Normal_edge[he] = true;
+            is_Delta_Normal_edge[twinhe] = true;
+        }  
+    }
+    return is_Delta_Normal_edge;
+}
+
 
 
 // Method to write mapped edges to a .obj file

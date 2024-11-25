@@ -33,6 +33,7 @@ int main() {
     auto is_longest_edge = find_longest_edges_mapping(mesh);
     auto is_frontier_edge = find_frontier_edges_mapping(mesh, is_longest_edge);
     auto is_seed_edge = find_seed_edges_mapping(mesh, is_longest_edge);
+    auto is_Delta_normal_edge = find_Delta_Normal_edges_mapping(mesh, is_frontier_edge, is_seed_edge, 20);
     
     std::cout << "******************************* "  << ":\n";
     // Write longest edges to a .obj file
@@ -40,6 +41,7 @@ int main() {
     write_mapped_edges_to_off(mesh, is_frontier_edge,"../../data/frontier_edges.off");
     write_mapped_edges_to_obj(mesh, is_seed_edge, "../../data/seed_edges.obj");
     write_mapped_edges_to_off(mesh, is_seed_edge,"../../data/seed_edges.off");
+    write_mapped_edges_to_off(mesh, is_seed_edge,"../../data/Delta_normal_edges.off");
     print_triangle_edge_lengths(mesh, is_longest_edge, 4);
     bool tf = triangle_wnolongest(mesh, is_longest_edge);
     Surface_mesh PolMesh = Polylla(mesh, is_seed_edge, is_frontier_edge);
