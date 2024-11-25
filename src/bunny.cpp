@@ -13,21 +13,7 @@ int main() {
     // Create an empty surface mesh
     Surface_mesh mesh=read_OFFfile("../../data/bunny2.off");
     
-
-    // Access the half-edge data structure
-    for (auto v : mesh.vertices()) {
-        // std::cout << "Vertex: " << mesh.point(v) << std::endl;
-    }
-
-    for (auto f : mesh.faces()) {
-        // std::cout << "Face: ";
-        for (auto h : CGAL::halfedges_around_face(mesh.halfedge(f), mesh)) {
-            // std::cout << mesh.point(target(h, mesh)) << " ";
-        }
-        // std::cout << std::endl;
-    }
-
-    //write_rdedges(mesh, "../../data/bunny_edges.obj");
+    std::cout << " Hola " << std::endl;
 
     // Find the mapping of longest edges
     auto is_longest_edge = find_longest_edges_mapping(mesh);
