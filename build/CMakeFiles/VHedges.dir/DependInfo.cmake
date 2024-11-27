@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/src/vhalfedges.cpp" "CMakeFiles/VHedges.dir/src/vhalfedges.cpp.o" "gcc" "CMakeFiles/VHedges.dir/src/vhalfedges.cpp.o.d"
+  "/media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/src/vhalfedges.cpp" "CMakeFiles/VHedges.dir/src/vhalfedges.cpp.o" "gcc" "CMakeFiles/VHedges.dir/src/vhalfedges.cpp.o.d"
   )
 
 # Targets to which this target links.

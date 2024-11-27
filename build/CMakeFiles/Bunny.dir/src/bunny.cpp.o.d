@@ -1,7 +1,7 @@
 CMakeFiles/Bunny.dir/src/bunny.cpp.o: \
- /media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/src/bunny.cpp \
+ /media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/src/bunny.cpp \
  /usr/include/stdc-predef.h \
- /media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/include/mesh.hpp \
+ /media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/include/mesh.hpp \
  /usr/local/include/CGAL/Surface_mesh.h \
  /usr/local/include/CGAL/license/Surface_mesh.h \
  /usr/local/include/CGAL/config.h /usr/include/boost/config.hpp \

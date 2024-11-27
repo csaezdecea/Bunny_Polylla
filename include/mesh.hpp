@@ -343,28 +343,43 @@ const std::unordered_map<Halfedge_index, bool>& is_longest_edge) {
 
 // Method to find the Delta Normal edges and store in the mapping
 std::unordered_map<Halfedge_index, bool> find_Delta_Normal_edges_mapping(const Surface_mesh& mesh, 
-std::unordered_map<Halfedge_index, bool>& is_frontier_edge, std::unordered_map<Halfedge_index, bool>& is_seed_edge, double critical_angle) {
+std::unordered_map<Halfedge_index, bool>& is_frontier_edge, std::unordered_map<Halfedge_index, bool>& is_seed_edge, 
+const std::unordered_map<Halfedge_index, bool>& is_longest_edge, double critical_angle) {
     std::unordered_map<Halfedge_index, bool> is_Delta_Normal_edge;
     double pi = atan(1)*4;
     std::cout << pi << std::endl;
     for (auto he : halfedges(mesh)) is_Delta_Normal_edge[he] = false;
     for (auto he : halfedges(mesh)) {
-        auto twinhe = mesh.opposite(he);
-        auto triangle_1 = mesh.face(he);
-        auto triangle_2 = mesh.face (twinhe);
-        Vector_3 normal1 = triangle_normal(he, mesh);
-        Vector_3 normal2 = triangle_normal(twinhe, mesh);
-        double cosAng = normal1 * normal2;
-        double cosCrit = cos(critical_angle*pi/180);
-        if (cosAng < cosCrit) {
-            is_Delta_Normal_edge[he] = true;
-            is_Delta_Normal_edge[twinhe] = true;
-        }  
+        if (!is_frontier_edge.at(he) & !mesh.is_border(he) & !is_Delta_Normal_edge.at(he)) {
+            auto twinhe = mesh.opposite(he);
+            auto triangle_1 = mesh.face(he);
+            auto triangle_2 = mesh.face (twinhe);
+            Vector_3 normal1 = triangle_normal(he, mesh);
+            Vector_3 normal2 = triangle_normal(twinhe, mesh);
+            double cosAng = normal1 * normal2;
+            double cosCrit = cos(critical_angle*pi/180);
+            if (cosAng < cosCrit) {
+                is_Delta_Normal_edge[he] = true;
+                is_Delta_Normal_edge[twinhe] = true;
+                if (is_longest_edge.at(he)) {
+                    is_seed_edge[he] =true;
+                } 
+                if (is_longest_edge.at(twinhe)) {
+                    is_seed_edge[twinhe] =true;
+                } 
+            }  
+        }
     }
     return is_Delta_Normal_edge;
 }
 
 
+void mark_frontier_edges(const Surface_mesh& mesh, const std::unordered_map<Halfedge_index, bool>& is_Delta_Normal_edge, 
+std::unordered_map<Halfedge_index, bool>& is_frontier_edge) {
+    for (auto he : halfedges(mesh)) {
+        if (is_Delta_Normal_edge.at(he)) is_frontier_edge[he] = true;
+    }
+}
 
 // Method to write mapped edges to a .obj file
 void write_mapped_edges_to_obj(const Surface_mesh& mesh, const std::unordered_map<Halfedge_index, bool>& is_mapped_edge, const std::string& filename) {

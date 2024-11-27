@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DBOOST_ALL_NO_LIB -DCGAL_USE_CORE=1 -DCGAL_USE_GMPXX=1
 
-CXX_INCLUDES = -I/media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/include
+CXX_INCLUDES = -I/media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/include
 
 CXX_FLAGS = -frounding-math
 

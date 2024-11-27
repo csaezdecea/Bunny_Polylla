@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla
+CMAKE_SOURCE_DIR = /media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/build
+CMAKE_BINARY_DIR = /media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -83,14 +83,14 @@ clean: CMakeFiles/VHedges.dir/clean
 CMakeFiles/Bunny.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Bunny.dir/build.make CMakeFiles/Bunny.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Bunny.dir/build.make CMakeFiles/Bunny.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/build/CMakeFiles --progress-num=1,2 "Built target Bunny"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/build/CMakeFiles --progress-num=1,2 "Built target Bunny"
 .PHONY : CMakeFiles/Bunny.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Bunny.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Bunny.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/build/CMakeFiles 0
 .PHONY : CMakeFiles/Bunny.dir/rule
 
 # Convenience name for target.
@@ -109,14 +109,14 @@ CMakeFiles/Bunny.dir/clean:
 CMakeFiles/VHedges.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VHedges.dir/build.make CMakeFiles/VHedges.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VHedges.dir/build.make CMakeFiles/VHedges.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/build/CMakeFiles --progress-num=3,4 "Built target VHedges"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/build/CMakeFiles --progress-num=3,4 "Built target VHedges"
 .PHONY : CMakeFiles/VHedges.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/VHedges.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/VHedges.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/cristian/SharedWin/Comp_Courses/Thesis/codes/CGALPolylla/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/cristian/SharedWin/Comp_Courses/Others/Github/CGALPolylla/build/CMakeFiles 0
 .PHONY : CMakeFiles/VHedges.dir/rule
 
 # Convenience name for target.

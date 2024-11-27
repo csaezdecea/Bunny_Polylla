@@ -48,7 +48,7 @@ def load_segments(segments_path):
     return segments
 
 
-def check_files(triangulation_path, segments_1_path, segments_2_path, segments_3_path):
+def check_files(triangulation_path, segments_1_path, segments_2_path, segments_3_path, segments_4_path):
     # Check if files exist before loading
     if not os.path.isfile(triangulation_path):
         raise FileNotFoundError(f"Triangulation file not found: {triangulation_path}")
@@ -58,6 +58,8 @@ def check_files(triangulation_path, segments_1_path, segments_2_path, segments_3
         raise FileNotFoundError(f"Segments file not found: {segments_2_path}")
     if not os.path.isfile(segments_3_path):
         raise FileNotFoundError(f"Segments file not found: {segments_3_path}")
+    if not os.path.isfile(segments_4_path):
+        raise FileNotFoundError(f"Segments file not found: {segments_4_path}")
 
 
 
@@ -99,12 +101,18 @@ def add_dashed_lines(plotter, segments, color="white", line_width=4, dash_length
 
 
 # Define the paths to your files
-triangulation_path = "data/bunny2.off"  # Replace with the actual path
-segments_1_path = "data/frontier_edges.obj"  # Use .obj format for segments
-segments_2_path = "data/seed_edges.obj"  # Use .obj format for segments
-segments_3_path = "data/NRP_edges.obj"  # Use .obj format for segments
+dataf = "data"
+Delta_normal = False
+triangulation_path = dataf+ "/bunny2.off"  # Replace with the actual path
+segments_1_path = dataf + "/frontier_edges.obj"  # Use .obj format for segments
+segments_2_path = dataf + "/seed_edges.obj"  # Use .obj format for segments
+segments_3_path = dataf + "/NRP_edges.obj"  # Use .obj format for segments
+segments_4_path = dataf + "/Delta_normal_edges.obj"  # Use .obj format for segments
 
-check_files(triangulation_path, segments_1_path, segments_2_path, segments_3_path)
+if (Delta_normal): 
+    check_files(triangulation_path, segments_1_path, segments_2_path, segments_3_path, segments_4_path)
+else:
+    check_files(triangulation_path, segments_1_path, segments_2_path, segments_3_path, segments_3_path)
 
 
 # Load triangulation using trimesh
@@ -119,12 +127,15 @@ faces = np.hstack((face_count, triangulation_mesh.faces)).astype(int).ravel()
 segments_1 = load_segments(segments_1_path)
 segments_2 = load_segments(segments_2_path)
 segments_3 = load_segments(segments_3_path)
+if (Delta_normal): 
+    segments_4 = load_segments(segments_4_path)
 
 # Create the PyVista PolyData for triangulation and segments
 triangulation = pv.PolyData(triangulation_mesh.vertices, faces)
 
 # Initialize a PyVista plotter
-plotter = pv.Plotter(off_screen=True)
+#plotter = pv.Plotter(off_screen=True)
+plotter = pv.Plotter()
 
 # Add the triangulation mesh
 plotter.add_mesh(triangulation, color="lightblue", opacity=1, show_edges=True, edge_color="black", line_width=4)
@@ -132,6 +143,8 @@ plotter.add_mesh(triangulation, color="lightblue", opacity=1, show_edges=True, e
 # Add the segments as another mesh with distinct styling
 plotter.add_mesh(segments_1, color="red", line_width=8)
 plotter.add_mesh(segments_3, color="yellow", line_width=4)
+if (Delta_normal):
+    plotter.add_mesh(segments_4, color="blue", line_width=4)
 add_dashed_lines(plotter, segments_2)
 
 # Coordinates of the segment you want to highlight
@@ -141,7 +154,7 @@ add_dashed_lines(plotter, segments_2)
 #plotter.add_lines(np.array([highlight_start, highlight_end]), color="yellow", width=10)
 
 # Add barrier points to the plot
-barrier_fname = "data/barrier_points.dat"
+barrier_fname = dataf + "/barrier_points.dat"
 barrier_points = np.loadtxt(barrier_fname)
 barrier_points_polydata = pv.PolyData(barrier_points)
 plotter.add_mesh(
@@ -162,5 +175,6 @@ plotter.camera_position = [(0, -1, 0), (0, 0, 0), (0, 0, 1)]  # Adjust view
 plotter.view_vector([-.5, 0, .5], [0, 1, 0])  # Set y-axis as up
 
 # Render the plot
-plotter.show(screenshot=("data/bunny.png"))
+# plotter.show(screenshot=("data/bunny.png"))
+plotter.show()
 
